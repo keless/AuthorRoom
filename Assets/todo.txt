@@ -1,0 +1,11 @@
+﻿
+
+todo:
+
+* load/save files from text area
+
+* hide nav buttons when writing text
+
+* add support for VR helmet
+
+* remap WASD to ESDF because logic 
