@@ -14,6 +14,8 @@ public class TextEditPanelController : MonoBehaviour {
 
     protected FileBrowser _fileBrowser;
 
+	protected GameObject _navPanel;
+
     // Use this for initialization
     void Start () {
 
@@ -22,6 +24,12 @@ public class TextEditPanelController : MonoBehaviour {
 
         EventBus.ui.addListener("btnLoad", onBtnLoad);
         EventBus.ui.addListener("btnSave", onBtnSave);
+
+		EventBus.ui.addListener("textFieldEntered", onTextFieldEntered);
+		EventBus.ui.addListener("textFieldExited", onTextFieldExited);
+
+		_navPanel = transform.FindChild ("NavPanel").gameObject;
+		Debug.Assert (_navPanel != null);
     }
 
     void OnDestroy()
@@ -30,13 +38,15 @@ public class TextEditPanelController : MonoBehaviour {
         EventBus.game.removeListener("enableTextPanel", onEnablePanel);
         EventBus.ui.removeListener("btnLoad", onBtnLoad);
         EventBus.ui.removeListener("btnSave", onBtnSave);
+		EventBus.ui.removeListener("textFieldEntered", onTextFieldEntered);
+		EventBus.ui.removeListener("textFieldExited", onTextFieldExited);
     }
 
     // Update is called once per frame
     void Update () {
 	
 	}
-
+		
     void OnLevelWasLoaded(int level)
     {
         level -= firstSceneIdx;
@@ -105,10 +115,21 @@ public class TextEditPanelController : MonoBehaviour {
         }
     }
 
+	void onTextFieldEntered(EventObject e)
+	{
+		_navPanel.SetActive (false);
+	}
+
+	void onTextFieldExited(EventObject e)
+	{
+		_navPanel.SetActive (true);
+	}
+
     protected void FileSelectedCallback(string path)
     {
         _fileBrowser = null;
-        string textPath = path;
+        //string textPath = path;
+		//todo
     }
 
     void OnGUI()
