@@ -37,5 +37,10 @@ public class KeyHandler : MonoBehaviour {
             //hax
             SceneManager.LoadScene(3);
         }
+
+		if (Input.GetMouseButtonDown(1))
+		{
+			EventBus.ui.dispatch (new EventObject ("rmbPressed"));
+		}
     }
 }

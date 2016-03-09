@@ -13,16 +13,26 @@ public class EditorModeController : MonoBehaviour {
         get { return _mode; }
     }
 
+	public bool textMode_inTextField;
+
 	// Use this for initialization
 	void Start () {
         _mode = Mode.Text;
+		textMode_inTextField = false;
 
         EventBus.ui.addListener("escPressed", onNavSwitchPressed);
+		EventBus.ui.addListener("rmbPressed", onRMBPressed);
+
+		EventBus.ui.addListener("textFieldEntered", onTextFieldEntered);
+		EventBus.ui.addListener("textFieldExited", onTextFieldExited);
 	}
    
     void OnDestroy()
     {
         EventBus.ui.removeListener("escPressed", onNavSwitchPressed);
+		EventBus.ui.removeListener("rmbPressed", onRMBPressed);
+		EventBus.ui.removeListener("textFieldEntered", onTextFieldEntered);
+		EventBus.ui.removeListener("textFieldExited", onTextFieldExited);
     }
 	
 	// Update is called once per frame
@@ -30,7 +40,30 @@ public class EditorModeController : MonoBehaviour {
 	
 	}
 
-    public void onNavSwitchPressed(EventObject evt)
+	void onTextFieldEntered(EventObject evt)
+	{
+		if (_mode == Mode.Text) {
+			textMode_inTextField = true;
+		}
+	}
+
+	void onTextFieldExited(EventObject evt)
+	{
+		if (_mode == Mode.Text) {
+			textMode_inTextField = false;
+		}
+	}
+
+	void onRMBPressed(EventObject evt)
+	{
+		if (_mode == Mode.Text && !textMode_inTextField) 
+		{
+			//pressed 'rmb' while in text mode, but outside of text field-- go to nav mode
+			setMode(Mode.Navigation);
+		}
+	}
+
+    void onNavSwitchPressed(EventObject evt)
     {
         setMode(_mode == Mode.Text ? Mode.Navigation : Mode.Text);
     }
