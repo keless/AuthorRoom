@@ -2,19 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Framework : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-}
-
 /// <summary>
 ///  EventBus provides an addListener/removeListener/dispatch interface
 ///  not guaranteed to be thread-safe

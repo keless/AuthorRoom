@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TextEditPanelController : MonoBehaviour {
+public class TextEditPanelController : CommonMonoBehavior {
 
     public UnityEngine.UI.Dropdown dropPlaces;
     string[] placeNames = { "Mountain", "Woods", "Ruined City" };
@@ -19,27 +19,19 @@ public class TextEditPanelController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        EventBus.game.addListener("dismissTextPanel", onDismissPanel);
-        EventBus.game.addListener("enableTextPanel", onEnablePanel);
+		SetListener("dismissTextPanel", onDismissPanel, "game");
+		SetListener("enableTextPanel", onEnablePanel, "game");
 
-        EventBus.ui.addListener("btnLoad", onBtnLoad);
-        EventBus.ui.addListener("btnSave", onBtnSave);
+		SetListener("btnLoad", onBtnLoad);
+		SetListener("btnSave", onBtnSave);
+		SetListener("btnHelp", onBtnHelp);
+		SetListener("btnDismissHelp", onBtnDismissHelp);
 
-		EventBus.ui.addListener("textFieldEntered", onTextFieldEntered);
-		EventBus.ui.addListener("textFieldExited", onTextFieldExited);
+		SetListener("textFieldEntered", onTextFieldEntered);
+		SetListener("textFieldExited", onTextFieldExited);
 
 		_navPanel = transform.FindChild ("NavPanel").gameObject;
 		Debug.Assert (_navPanel != null);
-    }
-
-    void OnDestroy()
-    {
-        EventBus.game.removeListener("dismissTextPanel", onDismissPanel);
-        EventBus.game.removeListener("enableTextPanel", onEnablePanel);
-        EventBus.ui.removeListener("btnLoad", onBtnLoad);
-        EventBus.ui.removeListener("btnSave", onBtnSave);
-		EventBus.ui.removeListener("textFieldEntered", onTextFieldEntered);
-		EventBus.ui.removeListener("textFieldExited", onTextFieldExited);
     }
 
     // Update is called once per frame
@@ -122,6 +114,22 @@ public class TextEditPanelController : MonoBehaviour {
             sw.Write(inputField.text);
         }
     }
+
+	void onBtnHelp(EventObject e)
+	{
+		GameObject helpPanel = transform.FindChild ("HelpPanel").gameObject;
+		if (!helpPanel.activeSelf) {
+			helpPanel.SetActive (true);
+		}
+	}
+	void onBtnDismissHelp(EventObject e)
+	{
+		GameObject helpPanel = transform.FindChild ("HelpPanel").gameObject;
+		if (helpPanel.activeSelf) {
+			helpPanel.SetActive (false);
+		}
+	}
+
 
 	void onTextFieldEntered(EventObject e)
 	{

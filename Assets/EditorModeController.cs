@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EditorModeController : MonoBehaviour {
+public class EditorModeController : CommonMonoBehavior {
 
     public enum Mode
     {
@@ -20,21 +20,13 @@ public class EditorModeController : MonoBehaviour {
         _mode = Mode.Text;
 		textMode_inTextField = false;
 
-        EventBus.ui.addListener("escPressed", onNavSwitchPressed);
-		EventBus.ui.addListener("rmbPressed", onRMBPressed);
+		SetListener ("escPressed", onNavSwitchPressed);
+		SetListener ("rmbPressed", onRMBPressed);
 
-		EventBus.ui.addListener("textFieldEntered", onTextFieldEntered);
-		EventBus.ui.addListener("textFieldExited", onTextFieldExited);
+		SetListener ("textFieldEntered", onTextFieldEntered);
+		SetListener ("textFieldExited", onTextFieldExited);
 	}
-   
-    void OnDestroy()
-    {
-        EventBus.ui.removeListener("escPressed", onNavSwitchPressed);
-		EventBus.ui.removeListener("rmbPressed", onRMBPressed);
-		EventBus.ui.removeListener("textFieldEntered", onTextFieldEntered);
-		EventBus.ui.removeListener("textFieldExited", onTextFieldExited);
-    }
-	
+
 	// Update is called once per frame
 	void Update () {
 	
@@ -56,6 +48,7 @@ public class EditorModeController : MonoBehaviour {
 
 	void onRMBPressed(EventObject evt)
 	{
+		Debug.Log ("onrmbpress");
 		if (_mode == Mode.Text) {
 			if (!textMode_inTextField) {
 				//pressed 'rmb' while in text mode, but outside of text field-- go to nav mode
