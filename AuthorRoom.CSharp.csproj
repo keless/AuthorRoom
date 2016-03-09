@@ -58,12 +58,6 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -73,7 +67,6 @@
     <Compile Include="Assets\Framework\CommonMonoBehavior.cs" />
     <Compile Include="Assets\Framework\FileBrowser.cs" />
     <Compile Include="Assets\Framework\Framework.cs" />
-    <Compile Include="Assets\Framework\JsonValue.cs" />
     <Compile Include="Assets\ImportedAssets\Container Barrel\Standard Assets\Image Effects (Pro Only)\BlurEffect.cs" />
     <Compile Include="Assets\ImportedAssets\Container Barrel\Standard Assets\Image Effects (Pro Only)\ColorCorrectionEffect.cs" />
     <Compile Include="Assets\ImportedAssets\Container Barrel\Standard Assets\Image Effects (Pro Only)\ContrastStretchEffect.cs" />
