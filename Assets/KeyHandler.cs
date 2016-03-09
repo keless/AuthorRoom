@@ -4,9 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class KeyHandler : MonoBehaviour {
 
+	bool RMB_pressTrigger;
+
 	// Use this for initialization
 	void Start () {
-	
+		RMB_pressTrigger = false;
 	}
 	
 	// Update is called once per frame
@@ -38,9 +40,13 @@ public class KeyHandler : MonoBehaviour {
             SceneManager.LoadScene(3);
         }
 
-		if (Input.GetMouseButtonDown(1))
-		{
-			EventBus.ui.dispatch (new EventObject ("rmbPressed"));
+		if (Input.GetMouseButtonDown (1)) {
+			if (!RMB_pressTrigger) {
+				EventBus.ui.dispatch (new EventObject ("rmbPressed"));
+				RMB_pressTrigger = true;
+			}
+		} else {
+			RMB_pressTrigger = false;
 		}
     }
 }

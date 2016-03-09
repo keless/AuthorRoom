@@ -56,10 +56,13 @@ public class EditorModeController : MonoBehaviour {
 
 	void onRMBPressed(EventObject evt)
 	{
-		if (_mode == Mode.Text && !textMode_inTextField) 
-		{
-			//pressed 'rmb' while in text mode, but outside of text field-- go to nav mode
-			setMode(Mode.Navigation);
+		if (_mode == Mode.Text) {
+			if (!textMode_inTextField) {
+				//pressed 'rmb' while in text mode, but outside of text field-- go to nav mode
+				setMode (Mode.Navigation);
+			}
+		} else {
+			setMode (Mode.Text);
 		}
 	}
 
