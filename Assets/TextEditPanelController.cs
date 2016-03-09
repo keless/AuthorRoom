@@ -90,7 +90,15 @@ public class TextEditPanelController : MonoBehaviour {
         Debug.Log("todo: btn load");
         if (_fileBrowser != null) return;
 
+		using (StreamReader sr = new StreamReader("text.txt"))
+		{
+			// Read the stream to a string, and write the string to the console.
+			string contents = sr.ReadToEnd();
 
+			InputField inputField = GetComponentInChildren<InputField>();
+			Debug.Assert(inputField);
+			inputField.text = contents;
+		}
     }
 
     void onBtnSave(EventObject e)
