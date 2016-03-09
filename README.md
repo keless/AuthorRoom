@@ -12,4 +12,5 @@ Mac
 https://github.com/keless/AuthorRoom/tree/master/binaries/mac_universal
 
 Win
-coming soon
+https://github.com/keless/AuthorRoom/tree/master/binaries/win_64bit
+https://github.com/keless/AuthorRoom/tree/master/binaries/win_32bit
