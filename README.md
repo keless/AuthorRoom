@@ -7,3 +7,9 @@ save and load from file "text.txt"
 
 # Binaries
 If you just want the Executable file without source, find the latest under the binaries folder.
+
+Mac
+https://github.com/keless/AuthorRoom/tree/master/binaries/mac_universal
+
+Win
+coming soon
